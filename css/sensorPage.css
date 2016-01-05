@@ -1,0 +1,25 @@
+
+body {
+    font-family: 'Roboto', sans-serif;
+    padding-top: 5%; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+h1 {
+    margin-top: 0%;
+    padding-top: 0%;
+}
+.hero-spacer {
+    margin-top: 5%;
+}
+.hero-feature {
+    margin-bottom: 5%;
+}
+.sensorList {
+   list-style-type: none;
+}
+#bothButton {
+    font-size: 125%;
+    margin-top: 5%;
+}
+footer {
+    margin: 50px 0;
+}
