@@ -1,9 +1,11 @@
 #!flask/bin/python
 from flask import Flask, jsonify, make_response
 from sense_hat import SenseHat
+from flask.ext.cors import CORS
 #from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
+CORS(app)
 
 sense = SenseHat()
 
