@@ -70,10 +70,21 @@
         <header class="jumbotron hero-spacer row">
             <div class="col-sm-12 text-center">
                 <h1>Sensor Data</h1>
+                <input type="hidden" name="bothSensors" id="bothSensors" value="">
             </div>
+            <div class="col-sm-5">
+                <p>Sensor #1 Address: <input type="text" name="address1" id="address1"></p>
+            </div>
+            <div class="col-sm-5">
+                <p>Sensor #2 Address: <input type="text" name="address2" id="address2"></p>  
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-primary btn-md" id="addressButton">Update Address</a>
+            </div>
+            <div class="col-sm-12 status-area text-center" id="status-area0"></div>
             <div class="col-sm-6">
                 <h3>Sensor #1</h3>
-                <ul class="sensorList">
+                <ul id="sensorList1" class="sensorList">
                     <li id="humidity1"><strong>Humidity (&#x0025;):</strong> <span></span></li>
                     <li id="temp1"><strong>Temperature (&#x2103;):</strong> <span></span></li>
                     <li id="tempHumid1"><strong>Temperature from Humidity (&#x2103;):</strong> <span></span></li>
@@ -131,11 +142,12 @@
                     </li>
                 </ul>
                 <h4 id="time1"><strong>Last update...</strong> <span>N/A</span></h4>
-                <a class="btn btn-primary btn-large" id="sensorButton1">Refresh Sensor #1</a>
+                <a class="btn btn-primary btn-large sensorButtons" id="sensorButton1">Refresh Sensor #1</a>
+                <div id="status-area1" class="status-area"></div>
             </div>
             <div class="col-sm-6">
-                <h3>Sensor #2</h3>
-                <ul class="sensorList">
+                <h3>Sensor #2</h3> 
+                <ul id="sensorList2" class="sensorList">
                     <li id="humidity2"><strong>Humidity (&#x0025;):</strong> <span></span></li>
                     <li id="temp2"><strong>Temperature (&#x2103;):</strong> <span></span></li>
                     <li id="tempHumid2"><strong>Temperature from Humidity (&#x2103;):</strong> <span></span></li>
@@ -193,75 +205,202 @@
                     </li>
                 </ul>
                 <h4 id="time2"><strong>Last update...</strong> <span>N/A</span></h4>
-                <a class="btn btn-primary btn-large" id="sensorButton2">Refresh Sensor #2</a>
+                <a class="btn btn-primary btn-large sensorButtons" id="sensorButton2">Refresh Sensor #2</a>
+                <div id="status-area2" class="status-area"></div>
             </div>
-            <div class="col-sm-6 col-sm-offset-1">
-                <a class="btn btn-primary btn-block" id="bothButton">Refresh Both</a>
+            <div class="col-sm-6 col-sm-offset-1 bothArea">
+                <a class="btn btn-primary btn-block sensorButtons" id="bothButton">Refresh Both</a>
+                <div id="status-area3" class="status-area bothArea"></div>
             </div>
         </header>
 
-       <!-- <hr>
+        <hr>
 
-        <div class="row">
-            <div class="col-lg-12">
-                <h3>Latest Features</h3>
+        <div class="row" id="data-section">
+            <div class="col-lg-12 text-center">
+                <h2>Data Analysis</h2>
             </div>
-        </div>
-
-        <div class="row text-center">
-
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Feature Label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
+            <div class="col-sm-6 hero-feature" id="sensor1Changes">
+                <h4>Sensor #1 Changes</h4>
+                <ul id="sensorList3" class="sensorList">
+                    <li id="humidity3"><strong>Humidity (&#x0025;):</strong> <span></span></li>
+                    <li id="temp3"><strong>Temperature (&#x2103;):</strong> <span></span></li>
+                    <li id="tempHumid3"><strong>Temperature from Humidity (&#x2103;):</strong> <span></span></li>
+                    <li id="tempPressure3"><strong>Temperature from Pressure (&#x2103;):</strong> <span></span></li>
+                    <li id="pressure3"><strong>Barometric Pressure (mB):</strong> <span></span></li>
+                    <li id="orientRadians3"><strong>Orientation (&#x33ad;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="orientDegrees3"><strong>Orientation (&#xb0;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="compass3"><strong>Compass (From North[&#xb0;]):</strong> <span></span></li>
+                    <li id="compassRaw3"><strong>Compass (&#x00B5;T) -</strong> 
+                        <ul>
+                            <li class="xAxis"><strong>X:</strong> <span></span></li>
+                            <li class="yAxis"><strong>Y:</strong> <span></span></li>
+                            <li class="zAxis"><strong>Z:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="gyro3"><strong>Gyroscope (&#xb0;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="gyroRaw3"><strong>Gyroscope (&#x33ad;/s) - </strong>
+                        <ul>
+                            <li class="xAxis"><strong>X:</strong> <span></span></li>
+                            <li class="yAxis"><strong>Y:</strong> <span></span></li>
+                            <li class="zAxis"><strong>Z:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="accel3"><strong>Accelerometer (&#xb0;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="accelRaw3"><strong>Accelerometer (Gs) -</strong>
+                        <ul>
+                            <li class="xAxis"><strong>X: </strong><span></span></li>
+                            <li class="yAxis"><strong>Y:</strong> <span></span></li>
+                            <li class="zAxis"><strong>Z:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Feature Label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
+            <div class="col-sm-6 hero-feature" id="sensor2Changes">
+                <h4>Sensor #2 Changes</h4>
+                <ul id="sensorList4" class="sensorList">
+                    <li id="humidity4"><strong>Humidity (&#x0025;):</strong> <span></span></li>
+                    <li id="temp4"><strong>Temperature (&#x2103;):</strong> <span></span></li>
+                    <li id="tempHumid4"><strong>Temperature from Humidity (&#x2103;):</strong> <span></span></li>
+                    <li id="tempPressure4"><strong>Temperature from Pressure (&#x2103;):</strong> <span></span></li>
+                    <li id="pressure4"><strong>Barometric Pressure (mB):</strong> <span></span></li>
+                    <li id="orientRadians4"><strong>Orientation (&#x33ad;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="orientDegrees4"><strong>Orientation (&#xb0;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="compass4"><strong>Compass (From North[&#xb0;]):</strong> <span></span></li>
+                    <li id="compassRaw4"><strong>Compass (&#x00B5;T) -</strong> 
+                        <ul>
+                            <li class="xAxis"><strong>X:</strong> <span></span></li>
+                            <li class="yAxis"><strong>Y:</strong> <span></span></li>
+                            <li class="zAxis"><strong>Z:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="gyro4"><strong>Gyroscope (&#xb0;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="gyroRaw4"><strong>Gyroscope (&#x33ad;/s) - </strong>
+                        <ul>
+                            <li class="xAxis"><strong>X:</strong> <span></span></li>
+                            <li class="yAxis"><strong>Y:</strong> <span></span></li>
+                            <li class="zAxis"><strong>Z:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="accel4"><strong>Accelerometer (&#xb0;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="accelRaw4"><strong>Accelerometer (Gs) -</strong>
+                        <ul>
+                            <li class="xAxis"><strong>X: </strong><span></span></li>
+                            <li class="yAxis"><strong>Y:</strong> <span></span></li>
+                            <li class="zAxis"><strong>Z:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Feature Label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
+            <hr class="dataBar">
+            <div class="col-sm-12 hero-feature" id="betweenSensorDifference">
+                <h4>Sensor Difference</h4>
+                <ul id="sensorList5" class="sensorList">
+                    <li id="humidity5"><strong>Humidity (&#x0025;):</strong> <span></span></li>
+                    <li id="temp5"><strong>Temperature (&#x2103;):</strong> <span></span></li>
+                    <li id="tempHumid5"><strong>Temperature from Humidity (&#x2103;):</strong> <span></span></li>
+                    <li id="tempPressure5"><strong>Temperature from Pressure (&#x2103;):</strong> <span></span></li>
+                    <li id="pressure5"><strong>Barometric Pressure (mB):</strong> <span></span></li>
+                    <li id="orientRadians5"><strong>Orientation (&#x33ad;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="orientDegrees5"><strong>Orientation (&#xb0;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="compass5"><strong>Compass (From North[&#xb0;]):</strong> <span></span></li>
+                    <li id="compassRaw5"><strong>Compass (&#x00B5;T) -</strong> 
+                        <ul>
+                            <li class="xAxis"><strong>X:</strong> <span></span></li>
+                            <li class="yAxis"><strong>Y:</strong> <span></span></li>
+                            <li class="zAxis"><strong>Z:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="gyro5"><strong>Gyroscope (&#xb0;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="gyroRaw5"><strong>Gyroscope (&#x33ad;/s) - </strong>
+                        <ul>
+                            <li class="xAxis"><strong>X:</strong> <span></span></li>
+                            <li class="yAxis"><strong>Y:</strong> <span></span></li>
+                            <li class="zAxis"><strong>Z:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="accel5"><strong>Accelerometer (&#xb0;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="accelRaw5"><strong>Accelerometer (Gs) -</strong>
+                        <ul>
+                            <li class="xAxis"><strong>X: </strong><span></span></li>
+                            <li class="yAxis"><strong>Y:</strong> <span></span></li>
+                            <li class="zAxis"><strong>Z:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Feature Label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="#" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
         </div>
         <!-- /.row -->
 

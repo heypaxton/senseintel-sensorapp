@@ -9,9 +9,20 @@ h1 {
 }
 .container .jumbotron {
     padding: 5%;
+    margin-top: 5%;
 }
-.hero-feature {
-    margin-bottom: 5%;
+.dataBar {
+    border: 1px solid #666;
+    margin: 3% 8%;
+}
+#data-section {
+    background-color: #eee;
+}
+.status-area .flash_message {
+    padding: 5px;
+    color: #157268;
+    font-size: 110%;
+    font-weight: 700;
 }
 strong {
     font-size: 125%;
@@ -22,9 +33,15 @@ strong {
 span {
     text-decoration: underline;
 }
+.sensorButtons, #sensor1Changes, #sensor2Changes, #betweenSensorDifference {
+    display: none;
+}
+.bothArea {
+   margin-top: 5%; 
+}
 #bothButton {
     font-size: 125%;
-    margin-top: 8%;
+    padding: 3% 57%;
 }
 footer {
     margin: 50px 0;

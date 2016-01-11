@@ -9,7 +9,7 @@ CORS(app)
 
 sense = SenseHat()
 
-sensor1 = [
+sensor = [
     {
         'humidity': sense.humidity,
         'temp': sense.temp,
@@ -44,12 +44,12 @@ def index():
 def get_sensorReadings():
     #for x in xrange(10):
       #sensorReadings  
-    return jsonify({'sensor1': sensor1})
+    return jsonify({'sensor': sensor})
 
 
 @app.errorhandler(404)
 def not_found(error):
-    return make_response(jsonify({'error': 'Not found on sensor #1'}), 404)
+    return make_response(jsonify({'error': 'Not data found on sensor'}), 404)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
