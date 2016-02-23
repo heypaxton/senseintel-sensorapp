@@ -11,6 +11,9 @@ h1 {
     padding: 5%;
     margin-top: 5%;
 }
+.gpsSeparator {
+    border: 1px solid #666;
+}
 .dataBar {
     border: 1px solid #666;
     margin: 3% 8%;
@@ -33,7 +36,7 @@ strong {
 span {
     text-decoration: underline;
 }
-.sensorButtons, #sensor1Changes, #sensor2Changes, #betweenSensorDifference {
+.sensorButtons, #sensor1Changes, #sensor2Changes, #betweenSensorDifference, #gpsError {
     display: none;
 }
 .bothArea {

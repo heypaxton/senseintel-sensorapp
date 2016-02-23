@@ -85,10 +85,12 @@
             <div class="col-sm-6">
                 <h3>Sensor #1</h3>
                 <ul id="sensorList1" class="sensorList">
+                    <li id="latitude1"><strong>Latitude (&#xb0;N):</strong> <span></span></li>
+                    <li id="longitude1"><strong>Longitude (&#xb0;E):</strong> <span></span></li>
+                    <li id="altitude1"><strong>Altitude (m):</strong> <span></span></li>
+                    <hr class="gpsSeparator">
                     <li id="humidity1"><strong>Humidity (&#x0025;):</strong> <span></span></li>
                     <li id="temp1"><strong>Temperature (&#x2103;):</strong> <span></span></li>
-                    <li id="tempHumid1"><strong>Temperature from Humidity (&#x2103;):</strong> <span></span></li>
-                    <li id="tempPressure1"><strong>Temperature from Pressure (&#x2103;):</strong> <span></span></li>
                     <li id="pressure1"><strong>Barometric Pressure (mB):</strong> <span></span></li>
                     <li id="orientRadians1"><strong>Orientation (&#x33ad;) - </strong>
                         <ul>
@@ -148,10 +150,12 @@
             <div class="col-sm-6">
                 <h3>Sensor #2</h3> 
                 <ul id="sensorList2" class="sensorList">
+                    <li id="latitude2"><strong>Latitude (&#xb0;N):</strong> <span></span></li>
+                    <li id="longitude2"><strong>Longitude (&#xb0;E):</strong> <span></span></li>
+                    <li id="altitude2"><strong>Altitude (m):</strong> <span></span></li>
+                    <hr class="gpsSeparator">
                     <li id="humidity2"><strong>Humidity (&#x0025;):</strong> <span></span></li>
                     <li id="temp2"><strong>Temperature (&#x2103;):</strong> <span></span></li>
-                    <li id="tempHumid2"><strong>Temperature from Humidity (&#x2103;):</strong> <span></span></li>
-                    <li id="tempPressure2"><strong>Temperature from Pressure (&#x2103;):</strong> <span></span></li>
                     <li id="pressure2"><strong>Barometric Pressure (mB):</strong> <span></span></li>
                     <li id="orientRadians2"><strong>Orientation (&#x33ad;) - </strong>
                         <ul>
@@ -220,13 +224,85 @@
             <div class="col-lg-12 text-center">
                 <h2>Data Analysis</h2>
             </div>
+            <div class="col-sm-6 hero-feature" id="betweenSensorDifference">
+                <h4>Sensor Difference</h4>
+                <ul id="sensorList5" class="sensorList">
+                    <li id="latitude5"><strong>Latitude (&#xb0;N):</strong> <span></span></li>
+                    <li id="longitude5"><strong>Longitude (&#xb0;E):</strong> <span></span></li>
+                    <li id="altitude5"><strong>Altitude (m):</strong> <span></span></li>
+                    <hr class="gpsSeparator">
+                    <li id="humidity5"><strong>Humidity (&#x0025;):</strong> <span></span></li>
+                    <li id="temp5"><strong>Temperature (&#x2103;):</strong> <span></span></li>
+                    <li id="pressure5"><strong>Barometric Pressure (mB):</strong> <span></span></li>
+                    <li id="orientRadians5"><strong>Orientation (&#x33ad;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="orientDegrees5"><strong>Orientation (&#xb0;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="compass5"><strong>Compass (From North[&#xb0;]):</strong> <span></span></li>
+                    <li id="compassRaw5"><strong>Compass (&#x00B5;T) -</strong> 
+                        <ul>
+                            <li class="xAxis"><strong>X:</strong> <span></span></li>
+                            <li class="yAxis"><strong>Y:</strong> <span></span></li>
+                            <li class="zAxis"><strong>Z:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="gyro5"><strong>Gyroscope (&#xb0;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="gyroRaw5"><strong>Gyroscope (&#x33ad;/s) - </strong>
+                        <ul>
+                            <li class="xAxis"><strong>X:</strong> <span></span></li>
+                            <li class="yAxis"><strong>Y:</strong> <span></span></li>
+                            <li class="zAxis"><strong>Z:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="accel5"><strong>Accelerometer (&#xb0;) - </strong>
+                        <ul>
+                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
+                            <li class="roll"><strong>Roll:</strong> <span></span></li>
+                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                    <li id="accelRaw5"><strong>Accelerometer (Gs) -</strong>
+                        <ul>
+                            <li class="xAxis"><strong>X: </strong><span></span></li>
+                            <li class="yAxis"><strong>Y:</strong> <span></span></li>
+                            <li class="zAxis"><strong>Z:</strong> <span></span></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-6 hero-feature" id="gpsError">
+                <h4>GPS Error</h4>
+                <ul id="sensorList6" class="sensorList">
+                    <li id="latitudeError6"><strong>Latitude Error (+/-m):</strong> <span></span></li>
+                    <li id="longitudeError6"><strong>Longitude Error (+/-m):</strong> <span></span></li>
+                    <li id="altitudeError6"><strong>Altitude Error (+/-m):</strong> <span></span></li>
+                </ul>
+            </div>
             <div class="col-sm-6 hero-feature" id="sensor1Changes">
                 <h4>Sensor #1 Changes</h4>
                 <ul id="sensorList3" class="sensorList">
+                    <li id="latitude3"><strong>Latitude (&#xb0;N):</strong> <span></span></li>
+                    <li id="longitude3"><strong>Longitude (&#xb0;E):</strong> <span></span></li>
+                    <li id="altitude3"><strong>Altitude (m):</strong> <span></span></li>
+                    <hr class="gpsSeparator">
                     <li id="humidity3"><strong>Humidity (&#x0025;):</strong> <span></span></li>
                     <li id="temp3"><strong>Temperature (&#x2103;):</strong> <span></span></li>
-                    <li id="tempHumid3"><strong>Temperature from Humidity (&#x2103;):</strong> <span></span></li>
-                    <li id="tempPressure3"><strong>Temperature from Pressure (&#x2103;):</strong> <span></span></li>
                     <li id="pressure3"><strong>Barometric Pressure (mB):</strong> <span></span></li>
                     <li id="orientRadians3"><strong>Orientation (&#x33ad;) - </strong>
                         <ul>
@@ -283,10 +359,12 @@
             <div class="col-sm-6 hero-feature" id="sensor2Changes">
                 <h4>Sensor #2 Changes</h4>
                 <ul id="sensorList4" class="sensorList">
+                    <li id="latitude4"><strong>Latitude (&#xb0;N):</strong> <span></span></li>
+                    <li id="longitude4"><strong>Longitude (&#xb0;E):</strong> <span></span></li>
+                    <li id="altitude4"><strong>Altitude (m):</strong> <span></span></li>
+                    <hr class="gpsSeparator">
                     <li id="humidity4"><strong>Humidity (&#x0025;):</strong> <span></span></li>
                     <li id="temp4"><strong>Temperature (&#x2103;):</strong> <span></span></li>
-                    <li id="tempHumid4"><strong>Temperature from Humidity (&#x2103;):</strong> <span></span></li>
-                    <li id="tempPressure4"><strong>Temperature from Pressure (&#x2103;):</strong> <span></span></li>
                     <li id="pressure4"><strong>Barometric Pressure (mB):</strong> <span></span></li>
                     <li id="orientRadians4"><strong>Orientation (&#x33ad;) - </strong>
                         <ul>
@@ -332,67 +410,6 @@
                         </ul>
                     </li>
                     <li id="accelRaw4"><strong>Accelerometer (Gs) -</strong>
-                        <ul>
-                            <li class="xAxis"><strong>X: </strong><span></span></li>
-                            <li class="yAxis"><strong>Y:</strong> <span></span></li>
-                            <li class="zAxis"><strong>Z:</strong> <span></span></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <hr class="dataBar">
-            <div class="col-sm-12 hero-feature" id="betweenSensorDifference">
-                <h4>Sensor Difference</h4>
-                <ul id="sensorList5" class="sensorList">
-                    <li id="humidity5"><strong>Humidity (&#x0025;):</strong> <span></span></li>
-                    <li id="temp5"><strong>Temperature (&#x2103;):</strong> <span></span></li>
-                    <li id="tempHumid5"><strong>Temperature from Humidity (&#x2103;):</strong> <span></span></li>
-                    <li id="tempPressure5"><strong>Temperature from Pressure (&#x2103;):</strong> <span></span></li>
-                    <li id="pressure5"><strong>Barometric Pressure (mB):</strong> <span></span></li>
-                    <li id="orientRadians5"><strong>Orientation (&#x33ad;) - </strong>
-                        <ul>
-                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
-                            <li class="roll"><strong>Roll:</strong> <span></span></li>
-                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
-                        </ul>
-                    </li>
-                    <li id="orientDegrees5"><strong>Orientation (&#xb0;) - </strong>
-                        <ul>
-                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
-                            <li class="roll"><strong>Roll:</strong> <span></span></li>
-                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
-                        </ul>
-                    </li>
-                    <li id="compass5"><strong>Compass (From North[&#xb0;]):</strong> <span></span></li>
-                    <li id="compassRaw5"><strong>Compass (&#x00B5;T) -</strong> 
-                        <ul>
-                            <li class="xAxis"><strong>X:</strong> <span></span></li>
-                            <li class="yAxis"><strong>Y:</strong> <span></span></li>
-                            <li class="zAxis"><strong>Z:</strong> <span></span></li>
-                        </ul>
-                    </li>
-                    <li id="gyro5"><strong>Gyroscope (&#xb0;) - </strong>
-                        <ul>
-                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
-                            <li class="roll"><strong>Roll:</strong> <span></span></li>
-                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
-                        </ul>
-                    </li>
-                    <li id="gyroRaw5"><strong>Gyroscope (&#x33ad;/s) - </strong>
-                        <ul>
-                            <li class="xAxis"><strong>X:</strong> <span></span></li>
-                            <li class="yAxis"><strong>Y:</strong> <span></span></li>
-                            <li class="zAxis"><strong>Z:</strong> <span></span></li>
-                        </ul>
-                    </li>
-                    <li id="accel5"><strong>Accelerometer (&#xb0;) - </strong>
-                        <ul>
-                            <li class="pitch"><strong>Pitch:</strong> <span></span></li>
-                            <li class="roll"><strong>Roll:</strong> <span></span></li>
-                            <li class="yaw"><strong>Yaw:</strong> <span></span></li>
-                        </ul>
-                    </li>
-                    <li id="accelRaw5"><strong>Accelerometer (Gs) -</strong>
                         <ul>
                             <li class="xAxis"><strong>X: </strong><span></span></li>
                             <li class="yAxis"><strong>Y:</strong> <span></span></li>
