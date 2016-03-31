@@ -82,6 +82,7 @@
                 <a class="btn btn-primary btn-md" id="addressButton">Update Address</a>
             </div>
             <div class="col-sm-12 status-area text-center" id="status-area0"></div>
+            <div class="col-sm-6 col-sm-offset-3" id="sensor3"></div>
             <div class="col-sm-6">
                 <h3>Sensor #1</h3>
                 <ul id="sensorList1" class="sensorList">
@@ -439,7 +440,55 @@
     <script src="js/jquery-1.11.3.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/OrbitControls.js"></script>
     <script src="js/sensorController.js"></script>
+    <script type="text/javascript">
+        var sensor3Comparison = $('#sensor3');
+        //sensor3Comparison.show();
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera( 75, sensor3Comparison.width()/(sensor3Comparison.width()*(3/4)), 0.1, 1000 );
+        camera.position.set( 0, 0, 50 );
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize( sensor3Comparison.width(), (sensor3Comparison.width()*(3/4)) );
+        sensor3Comparison.append( renderer.domElement );
+        controls = new THREE.OrbitControls( camera, renderer.domElement );
+        //controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
+        controls.autoRotate = true;
+        var clock = new THREE.Clock();
+        //controls.enableDamping = true;
+        //controls.dampingFactor = 0.25;
+        //controls.target.set( 0, 0, 0 ); // view direction perpendicular to XY-plane
+        //controls.noRotate = true;
+        //controls.noZoom = true; // optional
+        var boxHeight = 10;
+        var sensorHeight = 10;
+        var sensorAngle = 30;
+        var geometry = new THREE.BoxGeometry( 1, boxHeight, 1, 10, 1, 1 );
+        var material = new THREE.MeshBasicMaterial( { color: 0x00ff00, transparent: true, opacity: 0.5 } );
+        var cube = new THREE.Mesh( geometry, material );
+        scene.add( cube );
+
+        var trackShape = new THREE.Shape();
+        trackShape.moveTo( 40, 40 );
+        trackShape.lineTo( 40, 160 );
+        trackShape.absarc( 60, 160, 20, Math.PI, 0, true );
+        trackShape.lineTo( 80, 40 );
+        trackShape.absarc( 60, 40, 20, 2 * Math.PI, Math.PI, true );
+
+        camera.position.z = 3;
+
+        render();
+
+        function render() {
+            //cube.rotation.y += 0.01;
+            var delta = clock.getDelta();
+            controls.update(delta);
+            // render using requestAnimationFrame
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
+        }
+    </script>
 
 </body>
 

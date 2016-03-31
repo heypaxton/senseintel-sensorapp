@@ -45,6 +45,10 @@
     /*function analyzeData(data) {
         
     } */
+
+    function showAngle() {
+        console.log("This works");
+    }
     
     function displayData(sensor,data) {
         console.log(data);
@@ -80,7 +84,7 @@
         }
     }
     
-    function getDifference() {
+    function getDifference1() {
         //difference of last 2 sensor #1 readings
         rootRef.child("RPi1").orderByKey().once('value', function(snap) {
             var fullData1 = snap.val();
@@ -145,8 +149,14 @@
                 }
                 displayData(sensor,dataA);
             }
-            //difference of last 2 sensor #2 readings
-             rootRef.child("RPi2").orderByKey().once('value', function(snap) {
+            return data1a
+        });
+    }
+
+    function getDifference2() {
+        //difference of last 2 sensor #2 readings
+        rootRef.child("RPi2").orderByKey().once('value', function(snap) {
+            if (sensor === 2) {
                 var fullData2 = snap.val();
                 console.log(fullData2);
                 var fullDataArray2 = [];
@@ -209,67 +219,73 @@
                     }
                     displayData(sensor,dataB);
                 }
-                var dataDiff = {};
-                dataDiff.humidity = data1b.humidity - data1a.humidity;
-                dataDiff.temp = data1b.temp - data1a.temp;
-                dataDiff.pressure = data1b.pressure - data1a.pressure;
-                dataDiff.orient = {
-                    pitch: data1b.orient.pitch - data1a.orient.pitch,
-                    roll: data1b.orient.roll - data1a.orient.roll,
-                    yaw: data1b.orient.yaw - data1a.orient.yaw
-                };
-                dataDiff.orientRaw = {
-                    pitch: data1b.orientRaw.pitch - data1a.orientRaw.pitch,
-                    roll: data1b.orientRaw.roll - data1a.orientRaw.roll,
-                    yaw: data1b.orientRaw.yaw - data1a.orientRaw.yaw
-                };
-                dataDiff.compass = data1b.compass - data1a.compass;
-                dataDiff.compassRaw = {
-                    x: data1b.compassRaw.x - data1a.compassRaw.x,
-                    y: data1b.compassRaw.y - data1a.compassRaw.y,
-                    z: data1b.compassRaw.z - data1a.compassRaw.z
-                };
-                dataDiff.gyro = {
-                    pitch: data1b.gyro.pitch - data1a.gyro.pitch,
-                    roll: data1b.gyro.roll - data1a.gyro.roll,
-                    yaw: data1b.gyro.yaw - data1a.gyro.yaw
-                };
-                dataDiff.gyroRaw = {
-                    x: data1b.gyroRaw.x - data1a.gyroRaw.x,
-                    y: data1b.gyroRaw.y - data1a.gyroRaw.y,
-                    z: data1b.gyroRaw.z - data1a.gyroRaw.z
-                };
-                dataDiff.accel = {
-                    pitch: data1b.accel.pitch - data1a.accel.pitch,
-                    roll: data1b.accel.roll - data1a.accel.roll,
-                    yaw: data1b.accel.yaw - data1a.accel.yaw
-                };
-                dataDiff.accelRaw = {
-                    x: data1b.accelRaw.x - data1a.accelRaw.x,
-                    y: data1b.accelRaw.y - data1a.accelRaw.y,
-                    z: data1b.accelRaw.z - data1a.accelRaw.z
-                };
-                //var dataDiff = data1b - data1a;
-                console.log(!isEmpty(data1a) && !isEmpty(data1b));
-                sensor = 5;
-                if (!isEmpty(data1a) && !isEmpty(data1b)) {
-                    $('#betweenSensorDifference').show();
-                    if (!dataDiff) {
-                        dataDiff = 0;
-                    }
-                    displayData(sensor,dataDiff)
-                    var key1 = idArray1[dataLength1-1];
-                    var key2 = idArray2[dataLength2-1];
-                    rootRef.child("Difference").push({
-                        sensor1: key1,
-                        sensor2: key2,
-                        difference: dataDiff
-                    }, function onComplete() {
-                        console.log("added difference");
-                    });
-                }
-            });
+            }
+            return data2a
         });
+    }
+                
+    function getDifferenceBoth() {
+        var data1a = getDifference1();
+        var data1b = getDifference2();
+        var dataDiff = {};
+        dataDiff.humidity = data1b.humidity - data1a.humidity;
+        dataDiff.temp = data1b.temp - data1a.temp;
+        dataDiff.pressure = data1b.pressure - data1a.pressure;
+        dataDiff.orient = {
+            pitch: data1b.orient.pitch - data1a.orient.pitch,
+            roll: data1b.orient.roll - data1a.orient.roll,
+            yaw: data1b.orient.yaw - data1a.orient.yaw
+        };
+        dataDiff.orientRaw = {
+            pitch: data1b.orientRaw.pitch - data1a.orientRaw.pitch,
+            roll: data1b.orientRaw.roll - data1a.orientRaw.roll,
+            yaw: data1b.orientRaw.yaw - data1a.orientRaw.yaw
+        };
+        dataDiff.compass = data1b.compass - data1a.compass;
+        dataDiff.compassRaw = {
+            x: data1b.compassRaw.x - data1a.compassRaw.x,
+            y: data1b.compassRaw.y - data1a.compassRaw.y,
+            z: data1b.compassRaw.z - data1a.compassRaw.z
+        };
+        dataDiff.gyro = {
+            pitch: data1b.gyro.pitch - data1a.gyro.pitch,
+            roll: data1b.gyro.roll - data1a.gyro.roll,
+            yaw: data1b.gyro.yaw - data1a.gyro.yaw
+        };
+        dataDiff.gyroRaw = {
+            x: data1b.gyroRaw.x - data1a.gyroRaw.x,
+            y: data1b.gyroRaw.y - data1a.gyroRaw.y,
+            z: data1b.gyroRaw.z - data1a.gyroRaw.z
+        };
+        dataDiff.accel = {
+            pitch: data1b.accel.pitch - data1a.accel.pitch,
+            roll: data1b.accel.roll - data1a.accel.roll,
+            yaw: data1b.accel.yaw - data1a.accel.yaw
+        };
+        dataDiff.accelRaw = {
+            x: data1b.accelRaw.x - data1a.accelRaw.x,
+            y: data1b.accelRaw.y - data1a.accelRaw.y,
+            z: data1b.accelRaw.z - data1a.accelRaw.z
+        };
+        //var dataDiff = data1b - data1a;
+        console.log(!isEmpty(data1a) && !isEmpty(data1b));
+        sensor = 5;
+        if (!isEmpty(data1a) && !isEmpty(data1b)) {
+            $('#betweenSensorDifference').show();
+            if (!dataDiff) {
+                dataDiff = 0;
+            }
+            displayData(sensor,dataDiff)
+            var key1 = idArray1[dataLength1-1];
+            var key2 = idArray2[dataLength2-1];
+            rootRef.child("Difference").push({
+                sensor1: key1,
+                sensor2: key2,
+                difference: dataDiff
+            }, function onComplete() {
+                console.log("added difference");
+            });
+        }
     }
     
     function saveSensorCall(callRef,sensor,sensorRefKey,both,time) {
@@ -376,9 +392,19 @@
                 $('#sensorList6').html("<li>No GPS Data</li>");
                 $('#gpsError').show();
                 saveData(sensor,data,both);
+                if (sensor == 1) {
+                    getDifference1();
+                } else if (sensor == 2) {
+                    getDifference2();
+                } 
             } else {
                 console.log(data);
                 saveData(sensor,data,both);
+                if (sensor == 1) {
+                    getDifference1();
+                } else if (sensor == 2) {
+                    getDifference2();
+                } 
             }
         } else {
             if (!(data.latitude && data.longitude && data.altitude)) {
@@ -386,11 +412,13 @@
                 $('#sensorList6').html("<li>No GPS Data</li>");
                 $('#gpsError').show();
                 saveData(sensor,data,both);
-                getDifference();
+                getDifferenceBoth();
+                showAngle();
             } else {
                 console.log(data);
                 saveData(sensor,data,both);
-                getDifference();
+                getDifferenceBoth();
+                showAngle();
             }
         }
     }
@@ -457,6 +485,7 @@
         var both = false;
         var url = "http://192.168." + address1 + ":5000/api/v1.0/sensor";
         var url2 = "http://192.168." + address2 + ":5000/api/v1.0/sensor";
+        showAngle();
             $.ajax({
                 dataType: "JSON",
                 url: url,
