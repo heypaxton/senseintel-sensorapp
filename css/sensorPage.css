@@ -41,8 +41,11 @@ strong {
 span {
     text-decoration: underline;
 }
-.sensorButtons, #sensor1Changes, #sensor2Changes, #betweenSensorDifference, #gpsError {
+.sensorButtons, #sensor1Changes, #sensor2Changes, #betweenSensorDifference, #gpsError, #sensor1, #sensor2, #sensorButton1, #sensorButton2 {
     display: none;
+}
+#sensorButton1, #sensorButton2 {
+    margin-top: 5%;
 }
 .bothArea {
    margin-top: 5%; 

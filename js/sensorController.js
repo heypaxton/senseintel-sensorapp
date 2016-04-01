@@ -429,7 +429,19 @@
     $('#addressButton').on('click', function() {
         address1 = $('#address1').val();
         address2 = $('#address2').val();
-        $('.sensorButtons').show();
+        if (address1) {
+            $('#sensorButton1').show();
+            if (address2) {
+                $('#sensorButton1').hide();
+                $('#bothButton').show();
+            }
+        } else if (address2) {
+            $('#sensorButton2').show();
+            if (address1) {
+                $('#sensorButton2').hide();
+                $('#bothButton').show();
+            }
+        } 
         $('#status-area0').flash_message({
             text: 'Updated Addresses!',
             how: 'append'
@@ -440,6 +452,7 @@
         var both = false;
         var url = "http://192.168." + address1 + ":5000/api/v1.0/sensor";
         console.log(url);
+        $('#sensor1').show();
         $.ajax({
             dataType: "JSON",
             url: url,
@@ -462,6 +475,8 @@
         var sensor = 2;
         var both = false;
         var url = "http://192.168." + address2 + ":5000/api/v1.0/sensor";
+        console.log(url);
+        $('#sensor2').show();
         $.ajax({
             dataType: "JSON",
             url: url,
@@ -485,6 +500,10 @@
         var both = false;
         var url = "http://192.168." + address1 + ":5000/api/v1.0/sensor";
         var url2 = "http://192.168." + address2 + ":5000/api/v1.0/sensor";
+        console.log(url);
+        console.log(url2);
+        $('#sensor1').show();
+        $('#sensor2').show();
         showAngle();
             $.ajax({
                 dataType: "JSON",
