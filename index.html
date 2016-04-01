@@ -450,10 +450,12 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/three.min.js"></script>
     <script src="js/OrbitControls.js"></script>
-    <script src="js/dat.gui.js"></script>
     <script src="js/sensorController.js"></script>
     <script type="text/javascript">
         var sensor3Comparison = $('#sensor3');
+        sensor3Comparison.html('<div class="col-sm-12 text-center"><h5>Sensor1 <span class="legend" id="sensor1color"></span> Sensor2 <span class="legend" id="sensor2color"></span></h5></div>');
+        $('#sensor1color').css('background-color', '#ff0000')
+        $('#sensor2color').css('background-color', '#0ff000')
         //sensor3Comparison.show();
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera( 100, sensor3Comparison.width()/(sensor3Comparison.width()*(3/4)), 0.1, 1000 );
@@ -479,41 +481,73 @@
         //controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
         controls.autoRotate = true;
         var clock = new THREE.Clock();
-        /*controls.enableDamping = true;
-        controls.dampingFactor = 0.25;
-        controls.target.set( 0, 0, 0 ); // view direction perpendicular to XY-plane
-        controls.noRotate = true;
-        controls.noZoom = true; // optional */
-        var boxHeight = 10;
-        var sensorHeight = 15;
-        var sensorAngle = 30;
-        var geometry = new THREE.BoxGeometry( 5, boxHeight, 9, 10, 10, 10 );
-        var buildingMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00, transparent: true, opacity: 0.5 } );
+       
+        // Create the reference building
+        var buildingHeight = 20;
+        var geometry = new THREE.CylinderGeometry( 1, 1, buildingHeight, 8);
+        var buildingMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff, transparent: true, opacity: 0.5 } );
         var building = new THREE.Mesh( geometry, buildingMaterial );
         building.castShadow = true;
          // position the building
         building.position.x = 0;
-        building.position.y = boxHeight/2;
+        building.position.y = buildingHeight/2;
         building.position.z = 0;
         scene.add( building );
 
-        /*var extrudeSettings = { amount: 8, bevelEnabled: true, bevelSegments: 2, steps: 2, bevelSize: 1, bevelThickness: 1 };
-        var trackShape = new THREE.Shape();
-        trackShape.moveTo( 40, 40 );
-        trackShape.lineTo( 40, 160 );
-        trackShape.absarc( 60, 160, 20, Math.PI, 0, true );
-        trackShape.lineTo( 80, 40 );
-        trackShape.absarc( 60, 40, 20, 2 * Math.PI, Math.PI, true );*/
-        var geometry = new THREE.CylinderGeometry( 1, 1, sensorHeight, 8);
+        //Create the sensors
+        var sensor1Height = 15;
+        var sensor2Height = 2;
+        var sensor1Location = {};
+        var sensor2Location = {};
+        var sensor1Rotation = {};
+        var sensor2Rotation = {};
+        sensor1Location.x = 2.5;
+        sensor1Location.y = sensor1Height/2;
+        sensor1Location.z = 0;
+        sensor2Location.x = -1.1;
+        sensor2Location.y = sensor2Height/2;
+        sensor2Location.z = 3;
+        sensor1Rotation.x = -0.11 * Math.PI;
+        sensor1Rotation.y = -0.25 * Math.PI;
+        sensor1Rotation.z = -0.4 * Math.PI;
+        sensor2Rotation.x = 1.2* Math.PI;
+        sensor2Rotation.y = 0.06 * Math.PI;
+        sensor2Rotation.z = 0.3 * Math.PI;
+        //var sensorAngle = 30;
+        var geometry = new THREE.PlaneGeometry( 1, 1, sensor1Height, 8);
         var sensorMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, transparent: true, opacity: 0.7 } );
-        var sensors = new THREE.Mesh( geometry, sensorMaterial );
-        sensors.castShadow = true;
-         // position the sensors
-        sensors.rotation.x = -0.11 * Math.PI;
-        sensors.position.x = 2.5;
-        sensors.position.y = sensorHeight/2;
-        sensors.position.z = 0;
-        scene.add( sensors );
+        var sensor1 = new THREE.Mesh( geometry, sensorMaterial );
+        sensor1.castShadow = true;
+         // position the sensor1
+        sensor1.rotation.x = sensor1Rotation.x;
+        sensor1.rotation.y = sensor1Rotation.y;
+        sensor1.rotation.z = sensor1Rotation.z;
+        sensor1.position.x = sensor1Location.x;
+        sensor1.position.y = sensor1Location.y;
+        sensor1.position.z = sensor1Location.z;
+        scene.add( sensor1 );
+        var geometry = new THREE.PlaneGeometry( 1, 1, sensor2Height, 8);
+        var sensorMaterial = new THREE.MeshBasicMaterial( { color: 0x0ff000, transparent: true, opacity: 0.7 } );
+        var sensor2 = new THREE.Mesh( geometry, sensorMaterial );
+        sensor2.castShadow = true;
+         // position the sensor2
+        sensor2.rotation.x = sensor2Rotation.x;
+        sensor2.rotation.y = sensor2Rotation.y;
+        sensor2.rotation.z = sensor2Rotation.z;
+        sensor2.position.x = sensor2Location.x;
+        sensor2.position.y = sensor2Location.y;
+        sensor2.position.z = sensor2Location.z;
+        scene.add( sensor2 );
+
+        //Create sensor line
+        var lineMaterial = new THREE.LineBasicMaterial({
+            color: 0x666666
+        });
+        var geometry = new THREE.Geometry();
+        geometry.vertices.push(new THREE.Vector3(sensor1Location.x, sensor1Location.y, sensor1Location.z));
+        geometry.vertices.push(new THREE.Vector3(sensor2Location.x, sensor2Location.y, sensor2Location.z));
+        var line = new THREE.Line(geometry, lineMaterial);
+        scene.add(line);
 
         // add subtle ambient lighting
         var ambiColor = "#0c0c0c";
